@@ -1,13 +1,24 @@
 package kmeansproblem.daa;
-
+/**
+ * 
+ * @author Sabato Ceruso
+ * mail: sab7093@gmail.com
+ * Programación de aplicaciones interactivas.
+ * Universiad de La Laguna, Santa Cruz de Tenerife, España.
+ */
 import java.util.BitSet;
 
 import structure.problemsolvingmethods.daa.Solution;
 
 public class KMeansSolution extends Solution{
 	private BitSet solutionSet;
+	private int size;
 	
-	public KMeansSolution() {
+	public KMeansSolution(BitSet set) {
+		setSolutionSet(set);
+	}
+	public KMeansSolution(int n) {
+		setSize(n);
 		setSolutionSet(new BitSet());
 	}
 
@@ -30,6 +41,24 @@ public class KMeansSolution extends Solution{
 		
 		return solutionNodes;
 	}
+	
+	public int[] getNonSolutionIndexesArray() {
+		int j = 0;
+		int solutionNodes[] = new int[getSize() - getSolutionSet().cardinality()];
+		
+		for (int i = getSolutionSet().nextClearBit(0); i < getSize(); i = getSolutionSet().nextClearBit(i+1)) {
+		     solutionNodes[j++] = i;	
+		     if (i == Integer.MAX_VALUE) {
+		         break; // or (i+1) would overflow
+		     }
+		 }
+		
+		return solutionNodes;
+	}
+	public KMeansSolution clone() {
+		BitSet aux = (BitSet)getSolutionSet().clone();
+		return new KMeansSolution(aux);
+	}
 	public boolean containsElement(int n) {
 		return getSolutionSet().get(n);
 	}
@@ -45,6 +74,12 @@ public class KMeansSolution extends Solution{
 
 	public void setSolutionSet(BitSet solutionSet) {
 		this.solutionSet = solutionSet;
+	}
+	public int getSize() {
+		return size;
+	}
+	public void setSize(int size) {
+		this.size = size;
 	}
 
 	

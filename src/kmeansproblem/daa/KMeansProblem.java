@@ -1,5 +1,12 @@
 package kmeansproblem.daa;
 
+/**
+ * 
+ * @author Sabato Ceruso
+ * mail: sab7093@gmail.com
+ * Programación de aplicaciones interactivas.
+ * Universiad de La Laguna, Santa Cruz de Tenerife, España.
+ */
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -8,12 +15,21 @@ import java.util.Scanner;
 import structure.problemsolvingmethods.daa.Problem;
 import structure.problemsolvingmethods.daa.Solution;
 
-public class KMeansProblem extends Problem{
+public class KMeansProblem extends Problem {
 	private ArrayList<ArrayList<Integer>> affinities;
-	
-	public KMeansProblem(boolean max) {
+	private int Nnodes;
+
+	public KMeansProblem(boolean max, String filename) throws FileNotFoundException {
 		super(max);
 		setAffinities(new ArrayList<ArrayList<Integer>>());
+		
+		try {
+			read(filename);
+		} catch (FileNotFoundException e) {
+			
+			e.printStackTrace();
+			throw new FileNotFoundException();
+		}
 	}
 
 	@Override
@@ -21,14 +37,14 @@ public class KMeansProblem extends Problem{
 		KMeansSolution sol = (KMeansSolution) solution;
 		int solutionNodes[] = sol.getSolutionIndexesArray();
 		Double totalAffinity = 0.0;
-		
-		for (int i = 0; i < solutionNodes.length; i++)  {
+
+		for (int i = 0; i < solutionNodes.length; i++) {
 			for (int j = i + 1; j < solutionNodes.length; j++) {
 				totalAffinity += getAffinity(solutionNodes[i], solutionNodes[j]);
 			}
 		}
-		
-		sol.setScore(totalAffinity / (double) solutionNodes.length);		
+
+		sol.setScore(totalAffinity / (double) solutionNodes.length);
 	}
 
 	public ArrayList<ArrayList<Integer>> getAffinities() {
@@ -38,8 +54,10 @@ public class KMeansProblem extends Problem{
 	public void setAffinities(ArrayList<ArrayList<Integer>> costs) {
 		this.affinities = costs;
 	}
+
 	/**
 	 * Obtiene la afinidad del nodo p con el nodo q
+	 * 
 	 * @param p
 	 * @param q
 	 * @return
@@ -47,48 +65,55 @@ public class KMeansProblem extends Problem{
 	public Integer getAffinity(int p, int q) {
 		int min = Math.min(p, q);
 		int max = Math.max(p, q);
-		
+
 		try {
-			return getAffinities().get(min).get(max - min - 1);				// Testear
-		}
-		catch (ArrayIndexOutOfBoundsException e){
+			return getAffinities().get(min).get(max - min - 1); // Testear
+		} catch (ArrayIndexOutOfBoundsException e) {
 			System.err.println(e.getMessage());
 			throw new ArrayIndexOutOfBoundsException();
 		}
 	}
-	public void read(String filename) throws FileNotFoundException{
+
+	public void read(String filename) throws FileNotFoundException {
 		Scanner scanner = null;
 		Integer nNodes = -1;
 		int j;
 		int node;
 		try {
-		 scanner = new Scanner(new File(filename));
-		}
-		catch (FileNotFoundException e) {
+			scanner = new Scanner(new File(filename));
+		} catch (FileNotFoundException e) {
 			System.err.println("File not found");
 			throw new FileNotFoundException(e.getMessage());
 		}
-		//Leer cositas aca
+		// Leer cositas aca
 		nNodes = new Integer(scanner.nextLine());
+		setNnodes(nNodes);
 		j = nNodes - 1;
-		
+
 		try {
 			while (scanner.hasNext()) {
 				node = getAffinities().size();
 				getAffinities().add(new ArrayList<Integer>());
-				for (int i = 0;i < j; i++) {
-					getAffinities().get(node).add(new Integer(scanner.nextLine()));
+				for (int i = 0; i < j; i++) {
+					getAffinities().get(node).add(
+							new Integer(scanner.nextLine()));
 				}
 				j--;
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			System.err.println("Fichero mal escrito");
 			throw new RuntimeException();
-		}
-		finally {
+		} finally {
 			scanner.close();
 		}
 	}
-	
+
+	public int getNnodes() {
+		return Nnodes;
+	}
+
+	public void setNnodes(int nnodes) {
+		Nnodes = nnodes;
+	}
+
 }

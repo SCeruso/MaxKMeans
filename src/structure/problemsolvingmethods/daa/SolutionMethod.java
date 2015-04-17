@@ -1,11 +1,19 @@
 package structure.problemsolvingmethods.daa;
-
+/**
+ * 
+ * @author Sabato Ceruso
+ * mail: sab7093@gmail.com
+ * Programación de aplicaciones interactivas.
+ * Universiad de La Laguna, Santa Cruz de Tenerife, España.
+ */
 public abstract class SolutionMethod {
 	private int iteration;
 	private int iterationOfBestSolution;
 	private double elapsedTime;
 	private double elapsedTimeOfBestSolution;
 	private StopCriterion stopCriterion;
+	private Problem problem;
+	private Solution bestSolution;
 	
 	public SolutionMethod() {
 		setStopCriterion(new StopCriterion());
@@ -59,4 +67,21 @@ public abstract class SolutionMethod {
 		this.stopCriterion = stopCriterion;
 	}
 
+	public Problem getProblem() {
+		return problem;
+	}
+
+	public void setProblem(Problem problem) {
+		this.problem = problem;
+	}
+
+	public Solution getBestSolution() {
+		return bestSolution;
+	}
+
+	public void setBestSolution(Solution bestSolution) {
+		this.bestSolution = bestSolution;
+	}
+
+	
 }
