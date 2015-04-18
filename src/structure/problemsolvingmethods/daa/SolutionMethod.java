@@ -3,8 +3,14 @@ package structure.problemsolvingmethods.daa;
  * 
  * @author Sabato Ceruso
  * mail: sab7093@gmail.com
- * Programación de aplicaciones interactivas.
+ * Diseño y analisis de algoritmos.
  * Universiad de La Laguna, Santa Cruz de Tenerife, España.
+ */
+
+/**
+ * Clase abstracta para la representacion de algoritmos para la resolucion de problemas.
+ * @author sabato
+ *
  */
 public abstract class SolutionMethod {
 	private int iteration;
@@ -18,7 +24,9 @@ public abstract class SolutionMethod {
 	public SolutionMethod() {
 		setStopCriterion(new StopCriterion());
 	}
-	
+	/**
+	 * Ejecuta la busqueda de la solucion.
+	 */
 	public abstract void runSearch();
 	
 	public void resetIteration() {

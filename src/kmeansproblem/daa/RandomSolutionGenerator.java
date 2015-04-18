@@ -1,7 +1,17 @@
 package kmeansproblem.daa;
-
+/**
+ * 
+ * @author Sabato Ceruso
+ * mail: sab7093@gmail.com
+ * Diseño y analisis de algoritmos.
+ * Universiad de La Laguna, Santa Cruz de Tenerife, España.
+ */
 import java.util.Random;
-
+/**
+ * Clase que genera soluciones de manera aleatoria.
+ * @author sabato
+ *
+ */
 public class RandomSolutionGenerator implements SolutionGenerationMethod{
 	private int size;
 	

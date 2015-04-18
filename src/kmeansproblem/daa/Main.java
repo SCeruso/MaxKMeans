@@ -3,7 +3,7 @@ package kmeansproblem.daa;
  * 
  * @author Sabato Ceruso
  * mail: sab7093@gmail.com
- * Programación de aplicaciones interactivas.
+ * Diseño y analisis de algoritmos.
  * Universiad de La Laguna, Santa Cruz de Tenerife, España.
  */
 import java.io.FileNotFoundException;
@@ -49,7 +49,4 @@ public class Main {
 
 }
 
-
-// Seguir con grasp, insertar en solutionmetod problema y solucion.
-// Comprobar que elegir los dos mejores est� bien.
 // Implementar cruce para ags

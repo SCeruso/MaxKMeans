@@ -11,6 +11,11 @@ import java.util.Random;
 
 import structure.problemsolvingmethods.daa.SolutionMethod;
 
+/**
+ * Algoritmo que realiza la fase constructiva del GRASP.
+ * @author sabato
+ *
+ */
 public abstract class ConstructiveGRASP extends SolutionMethod {
 	private ArrayList<KMeansSolution> lrc;
 	private Integer lrcSize;
@@ -19,6 +24,12 @@ public abstract class ConstructiveGRASP extends SolutionMethod {
 	public static final int DIRECT = 0;
 	public static final int REVERSE = 1;
 	
+	/**
+	 * 
+	 * @param problem Problema a resolver.
+	 * @param lrc Tamaño de la lista restringida de candidatos.
+	 * @param type Tipo de grasp, si construye añadiendo o quitando nodos.
+	 */
 	public ConstructiveGRASP(KMeansProblem problem, int lrc, int type) {
 		setLrc(new ArrayList<KMeansSolution>());
 		setLrcSize(lrc);
@@ -32,9 +43,6 @@ public abstract class ConstructiveGRASP extends SolutionMethod {
 			setMove(new RemovalMovement());
 	}
 	
-	
-	// Ir buscando los mejores candidatos a insertar
-	// Tirada aleatoria entre los mejores
 	@Override
 	public void runSearch() {			
 		initialize();
@@ -49,15 +57,21 @@ public abstract class ConstructiveGRASP extends SolutionMethod {
 		}
 		
 	}
-	
-	private void selectFromLRC() {		// Pensar si implementar como interfaz y componer.
+	/**
+	 * Selecciona un candidato al azar de la lista restringida de candidatos.
+	 */
+	private void selectFromLRC() {
 		Random engine = new Random();
 		int choice = engine.nextInt(getLrc().size());
 		
 		setActualSolution(getLrc().get(choice));	
 	}
-	
-	private boolean insertLrc(KMeansSolution sol) {	// Probar!!!!
+	/**
+	 * Inserta una solucion en la lista, se mantendra siempre ordenada.
+	 * @param sol
+	 * @return
+	 */
+	private boolean insertLrc(KMeansSolution sol) {
 		int i = 0;
 		int j = i + 1;
 		
@@ -79,8 +93,10 @@ public abstract class ConstructiveGRASP extends SolutionMethod {
 		
 		return getLrc().contains(sol);
 	}
-	
-	private void makeLrc() {			// Probar
+	/**
+	 * Realiza la lista restringida de candidatos.
+	 */
+	private void makeLrc() {			
 		int nonInsertedNodes[];
 		KMeansSolution aux = getActualSolution().clone();
 		setLrc(new ArrayList<KMeansSolution>(getLrcSize()));
@@ -105,7 +121,9 @@ public abstract class ConstructiveGRASP extends SolutionMethod {
 			else
 				j++;
 	}
-	
+	/**
+	 * Inicializa el grasp con una solucion.
+	 */
 	protected abstract void initialize();
 	
 	public ArrayList<KMeansSolution> getLrc() {
@@ -130,22 +148,15 @@ public abstract class ConstructiveGRASP extends SolutionMethod {
 		return actualSolution;
 	}
 
-
-	
 	protected void setActualSolution(KMeansSolution actualSolution) {
 		this.actualSolution = actualSolution;
 	}
-
-
 	
 	protected Movement getMove() {
 		return move;
 	}
 
-
 	protected void setMove(Movement move) {
 		this.move = move;
-	}
-	
-	
+	}	
 }

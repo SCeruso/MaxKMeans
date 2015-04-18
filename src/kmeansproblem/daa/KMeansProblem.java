@@ -4,7 +4,7 @@ package kmeansproblem.daa;
  * 
  * @author Sabato Ceruso
  * mail: sab7093@gmail.com
- * Programación de aplicaciones interactivas.
+ * Diseño y analisis de algoritmos.
  * Universiad de La Laguna, Santa Cruz de Tenerife, España.
  */
 import java.io.File;
@@ -14,11 +14,21 @@ import java.util.Scanner;
 
 import structure.problemsolvingmethods.daa.Problem;
 import structure.problemsolvingmethods.daa.Solution;
-
+/**
+ * Clase que representa el problema del la maxima k media.
+ * @author sabato
+ *
+ */
 public class KMeansProblem extends Problem {
-	private ArrayList<ArrayList<Integer>> affinities;
+	private ArrayList<ArrayList<Integer>> affinities;			// Grafo de afinidades.
 	private int Nnodes;
-
+	
+	/**
+	 * 
+	 * @param max True si es un problemas de maximizar.
+	 * @param filename Nombre del archivo donde se encuentra el grafo
+	 * @throws FileNotFoundException
+	 */
 	public KMeansProblem(boolean max, String filename) throws FileNotFoundException {
 		super(max);
 		setAffinities(new ArrayList<ArrayList<Integer>>());
@@ -74,6 +84,11 @@ public class KMeansProblem extends Problem {
 		}
 	}
 
+	/**
+	 * Lee de fichero el grafo
+	 * @param filename
+	 * @throws FileNotFoundException
+	 */
 	public void read(String filename) throws FileNotFoundException {
 		Scanner scanner = null;
 		Integer nNodes = -1;
@@ -85,7 +100,6 @@ public class KMeansProblem extends Problem {
 			System.err.println("File not found");
 			throw new FileNotFoundException(e.getMessage());
 		}
-		// Leer cositas aca
 		nNodes = new Integer(scanner.nextLine());
 		setNnodes(nNodes);
 		j = nNodes - 1;

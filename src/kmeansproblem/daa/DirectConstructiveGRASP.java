@@ -1,8 +1,15 @@
 package kmeansproblem.daa;
-
+/**
+ * 
+ * @author Sabato Ceruso
+ * mail: sab7093@gmail.com
+ * Diseño y analisis de algoritmos.
+ * Universiad de La Laguna, Santa Cruz de Tenerife, España.
+ */
 import java.util.ArrayList;
 
 /**
+ * Grasp que construye la solucion añadiendo nodos.
  * @author sabato
  *
  */
@@ -14,7 +21,9 @@ public class DirectConstructiveGRASP extends ConstructiveGRASP {
 	
 
 	
-	// Encontrar los dos mas amigos
+	/**
+	 * Encuentra los dos nodos con mayor afinidad.
+	 */
 	@Override
 	protected void initialize() {				
 		KMeansProblem problem = (KMeansProblem)getProblem();

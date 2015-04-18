@@ -3,12 +3,18 @@ package structure.problemsolvingmethods.daa;
  * 
  * @author Sabato Ceruso
  * mail: sab7093@gmail.com
- * Programación de aplicaciones interactivas.
+ * Diseño y analisis de algoritmos.
  * Universiad de La Laguna, Santa Cruz de Tenerife, España.
+ */
+
+/**
+ * Clase abstracta para la reprecentacion de soluciones.
+ * @author sabato
+ *
  */
 public abstract class Solution {
 
-	private Double score;
+	private Double score;			// Puntuacion, o valor segun el problema.
 	
 	public Solution(Double score) {
 		setScore(score);
