@@ -69,6 +69,10 @@ public class KMeansSolution extends Solution{
 	public void removeElement(int n) {
 		getSolutionSet().clear(n);
 	}
+	
+	public void flipElement(int n) {
+		getSolutionSet().flip(n);
+	}
 	public BitSet getSolutionSet() {
 		return solutionSet;
 	}

@@ -32,6 +32,12 @@ public class Main {
 		greedy = new ConstructiveGreedy(problem, ConstructiveGreedy.DIRECT);
 		greedy.runSearch();
 		System.out.println("Best Solution: " + greedy.getBestSolution());
+		
+		GRASPandLocalSearch grasp;
+		grasp = new GRASPandLocalSearch(problem, 2, ConstructiveGRASP.REVERSE);
+		grasp.runSearch();
+		System.out.println("Best Solution: " + grasp.getBestSolution());
+		
 	}
 
 }
