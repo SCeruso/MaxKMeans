@@ -12,7 +12,28 @@ public class VNS extends SolutionMethod{
 	}
 	@Override
 	public void runSearch() {
-		// TODO Auto-generated method stub
+		RandomSolutionGenerator generator = new RandomSolutionGenerator(((KMeansProblem)getProblem()).getNnodes());
+		KMeansSolution actual = generator.generate();
+		KMeansSolution newSolution;
+		LocalSearch localSearch;
+		int k = 0;
+		setBestSolution(actual);
+		
+		while (k < getEnviroments().size()) {
+			getEnviroments().get(k).setSolution(actual);
+			newSolution = getEnviroments().get(k).generateRandom();
+			localSearch = new LocalSearch((KMeansProblem)getProblem(), newSolution);
+			localSearch.setEnviroment(getEnviroments().get(k));
+			localSearch.runSearch();
+			
+			if (getProblem().firstSolutionIsBetter(localSearch.getBestSolution(), actual)) {
+				actual = (KMeansSolution)localSearch.getBestSolution();
+				setBestSolution(actual);
+				k = 0;
+			}
+			else
+				k++;
+		}
 		
 	}
 	private ArrayList<Enviroment> getEnviroments() {

@@ -1,5 +1,7 @@
 package kmeansproblem.daa;
 
+import java.util.Random;
+
 public class Enviroment {
 	private Movement move;
 	private KMeansSolution solution;
@@ -18,6 +20,12 @@ public class Enviroment {
 			return getMove().makeMove(getSolution().clone(), index++);
 	}
 	
+	public KMeansSolution generateRandom() {
+		Random engine = new Random();
+		int choice = engine.nextInt(getSolution().getSize());
+		
+		return getMove().makeMove(getSolution().clone(), choice);
+	}
 	public boolean hasMoreSolutions() {
 		return getIndex() >= getSolution().getSize()? false : true;
 	}
