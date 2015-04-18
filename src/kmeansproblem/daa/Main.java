@@ -14,29 +14,29 @@ import javax.swing.JMenu;
 public class Main {
 
 	public static void main(String[] args) {
+		KMeansProblem problem;
+		ConstructiveGreedy greedy;
 		try {
-			KMeansProblem problem = new KMeansProblem(true, "res/problems/max-mean-div-10.txt");
+			problem = new KMeansProblem(true, "res/problems/max-mean-div-10.txt");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return;
 		}
-		KMeansSolution sol = new KMeansSolution(10);
+		greedy = new ConstructiveGreedy(problem, ConstructiveGreedy.REVERSE);
 		
-		
-		sol.addElement(7);
-		sol.addElement(5);
+		greedy.runSearch();
 
-	
-		
-		//problem.evaluate(sol);
-		sol.getNonSolutionIndexesArray();
-		System.out.println(sol.getScore());
+		System.out.println("Best Solution: " + greedy.getBestSolution());
+
+		greedy = new ConstructiveGreedy(problem, ConstructiveGreedy.DIRECT);
+		greedy.runSearch();
+		System.out.println("Best Solution: " + greedy.getBestSolution());
 	}
 
 }
 
 
 // Seguir con grasp, insertar en solutionmetod problema y solucion.
-// Comprobar que elegir los dos mejores está bien.
+// Comprobar que elegir los dos mejores estï¿½ bien.
 // Implementar cruce para ags

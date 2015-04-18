@@ -14,8 +14,9 @@ public class KMeansSolution extends Solution{
 	private BitSet solutionSet;
 	private int size;
 	
-	public KMeansSolution(BitSet set) {
+	public KMeansSolution(BitSet set, int n) {
 		setSolutionSet(set);
+		setSize(n);
 	}
 	public KMeansSolution(int n) {
 		setSize(n);
@@ -57,7 +58,7 @@ public class KMeansSolution extends Solution{
 	}
 	public KMeansSolution clone() {
 		BitSet aux = (BitSet)getSolutionSet().clone();
-		return new KMeansSolution(aux);
+		return new KMeansSolution(aux, getSize());
 	}
 	public boolean containsElement(int n) {
 		return getSolutionSet().get(n);
@@ -82,5 +83,8 @@ public class KMeansSolution extends Solution{
 		this.size = size;
 	}
 
+	public String toString() {
+		return getSolutionSet().toString() + ", " + getScore();
+	}
 	
 }
