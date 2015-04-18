@@ -27,8 +27,11 @@ public class MultiStart extends SolutionMethod{
 	}
 	@Override
 	public void runSearch() {
+		int iteration = 0;
+		long time = System.currentTimeMillis();
 		setBestSolution(getGenerator().generate());
-		do {	
+		do {
+			iteration++;
 			getStopCriterion().iterationIncrease();
 			setActualSolution(getGenerator().generate());
 			setLocalSearch(new LocalSearch((KMeansProblem)getProblem(), (KMeansSolution)getActualSolution()));
@@ -39,6 +42,9 @@ public class MultiStart extends SolutionMethod{
 				getStopCriterion().resetIteration();
 			}
 		} while (!getStopCriterion().stop());
+		
+		setIteration(iteration);
+		setElapsedTime(System.currentTimeMillis() - time);
 	}
 	private SolutionGenerationMethod getGenerator() {
 		return generator;

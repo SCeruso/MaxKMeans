@@ -45,9 +45,12 @@ public class VNS extends SolutionMethod{
 		KMeansSolution newSolution;
 		LocalSearch localSearch;
 		int k = 0;
+		int iteration = 0;
+		long time = System.currentTimeMillis();
 		setBestSolution(actual);
 		
 		while (k < getEnviroments().size()) {
+			iteration++;
 			getEnviroments().get(k).setSolution(actual);
 			newSolution = getEnviroments().get(k).generateRandom();
 			localSearch = new LocalSearch((KMeansProblem)getProblem(), newSolution);
@@ -62,7 +65,8 @@ public class VNS extends SolutionMethod{
 			else
 				k++;
 		}
-		
+		setIteration(iteration);
+		setElapsedTime(System.currentTimeMillis() - time);
 	}
 	private ArrayList<Enviroment> getEnviroments() {
 		return enviroments;

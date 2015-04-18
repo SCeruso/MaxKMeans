@@ -16,7 +16,7 @@ public class Main {
 		KMeansProblem problem;
 		ConstructiveGreedy greedy;
 		try {
-			problem = new KMeansProblem(true, "res/problems/max-mean-div-10.txt");
+			problem = new KMeansProblem(true, "res/problems/max-mean-div-100.txt");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -33,22 +33,23 @@ public class Main {
 		greedy.runSearch();
 		System.out.println("Best Solution: " + greedy.getBestSolution());*/
 		
-		GRASPandLocalSearch grasp;
-		grasp = new GRASPandLocalSearch(problem, 2, ConstructiveGRASP.REVERSE);
+		/*GRASPandLocalSearch grasp;
+		grasp = new GRASPandLocalSearch(problem, 4, ConstructiveGRASP.DIRECT);
 		grasp.runSearch();
 		System.out.println("Best Solution: " + grasp.getBestSolution());
-		System.out.println(grasp.getElapsedTime() + ", " + grasp.getIteration());
-		/*
-		MultiStart multi = new MultiStart(problem, new RandomSolutionGenerator(problem.getNnodes()), new StopCriterion(20));
+		System.out.println(grasp.getElapsedTime() + ", " + grasp.getIteration());*/
+		
+		/*MultiStart multi = new MultiStart(problem, new RandomSolutionGenerator(problem.getNnodes()), new StopCriterion(20));
 		multi.runSearch();
 		System.out.println("Best Solution: " + multi.getBestSolution());
-		
-		VNS vns = new VNS(problem, 4);
+		System.out.println(multi.getElapsedTime() + ", " + multi.getIteration());
+		*/VNS vns = new VNS(problem, 4);
 		
 		vns.runSearch();
-		System.out.println("Best Solution: " + vns.getBestSolution());*/
+		System.out.println("Best Solution: " + vns.getBestSolution());
+		System.out.println(vns.getElapsedTime() + ", " + vns.getIteration());
 	}
 
 }
-
+// Prepararlo para el jar ejecutable.
 // Implementar cruce para ags

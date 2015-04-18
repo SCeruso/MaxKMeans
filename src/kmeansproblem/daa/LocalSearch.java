@@ -29,16 +29,18 @@ public class LocalSearch extends SolutionMethod{
 	@Override
 	public void runSearch() {
 		KMeansSolution aux;
-		
+		int iteration = 0;
 		while (getEnviroment().hasMoreSolutions()) {
+			iteration++;
 			aux = getEnviroment().getNextSolutionFromEnviroment();
 			if (getProblem().firstSolutionIsBetter(aux, getActualSolution())) {
 				setActualSolution(aux);
 				setBestSolution(getActualSolution());
+				setIterationOfBestSolution(iteration);
 				setEnviroment(new Enviroment(aux, getEnviroment().getMove(), getEnviroment().getIndex().length));
 			}
 		}
-		
+		setIteration(iteration);
 	}
 	public KMeansSolution getActualSolution() {
 		return actualSolution;

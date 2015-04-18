@@ -34,10 +34,17 @@ public class GRASPandLocalSearch extends SolutionMethod {
 	}
 	@Override
 	public void runSearch() {
+		int iteration = 0;
+		long time = System.currentTimeMillis();
 		getGrasp().runSearch();
 		setLocalSearch(new LocalSearch((KMeansProblem)getProblem(), (KMeansSolution)getGrasp().getBestSolution()));
 		getLocalSearch().runSearch();
 		setBestSolution(getLocalSearch().getBestSolution());
+		iteration = getGrasp().getIteration() + getLocalSearch().getIteration();
+		setElapsedTime(System.currentTimeMillis() - time);
+		setElapsedTimeOfBestSolution(getElapsedTime());
+		setIteration(iteration);
+		setIterationOfBestSolution(iteration);
 	}
 	private ConstructiveGRASP getGrasp() {
 		return grasp;
