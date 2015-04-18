@@ -16,7 +16,7 @@ public class Main {
 		KMeansProblem problem;
 		ConstructiveGreedy greedy;
 		try {
-			problem = new KMeansProblem(true, "res/problems/max-mean-div-20.txt");
+			problem = new KMeansProblem(true, "res/problems/max-mean-div-100.txt");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -37,7 +37,7 @@ public class Main {
 		grasp.runSearch();
 		System.out.println("Best Solution: " + grasp.getBestSolution());
 		
-		MultiStart multi = new MultiStart(problem, new RandomSolutionGenerator(problem.getNnodes()), new StopCriterion(250));
+		MultiStart multi = new MultiStart(problem, new RandomSolutionGenerator(problem.getNnodes()), new StopCriterion(20));
 		multi.runSearch();
 		System.out.println("Best Solution: " + multi.getBestSolution());
 		
