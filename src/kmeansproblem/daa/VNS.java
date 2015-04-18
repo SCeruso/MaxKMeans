@@ -7,8 +7,18 @@ import structure.problemsolvingmethods.daa.SolutionMethod;
 public class VNS extends SolutionMethod{
 	private ArrayList<Enviroment> enviroments;
 	
-	public VNS (KMeansProblem problem, int k) {
+	public VNS (KMeansProblem problem, int k) throws IllegalArgumentException{
+		if (k < 3)
+			throw new IllegalArgumentException("La k no puede ser menor a 3");
+		
+		setEnviroments(new ArrayList<Enviroment>());
 		setProblem(problem);
+		getEnviroments().add(new Enviroment(new RemovalMovement(), 1));
+		getEnviroments().add(new Enviroment(new AdditionMovement(), 1));
+		getEnviroments().add(new Enviroment(new ExchangeMovement(), 1));
+		
+		for (int i = 0; i < k - 3; i++)
+			getEnviroments().add(new Enviroment(new ExchangeMovement(), i + 2));
 	}
 	@Override
 	public void runSearch() {

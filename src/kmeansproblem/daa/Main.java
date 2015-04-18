@@ -40,6 +40,11 @@ public class Main {
 		MultiStart multi = new MultiStart(problem, new RandomSolutionGenerator(problem.getNnodes()), new StopCriterion(250));
 		multi.runSearch();
 		System.out.println("Best Solution: " + multi.getBestSolution());
+		
+		VNS vns = new VNS(problem, 4);
+		
+		vns.runSearch();
+		System.out.println("Best Solution: " + vns.getBestSolution());
 	}
 
 }

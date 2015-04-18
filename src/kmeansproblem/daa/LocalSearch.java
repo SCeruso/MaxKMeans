@@ -10,7 +10,7 @@ public class LocalSearch extends SolutionMethod{
 		setActualSolution(solution);
 		setProblem(problem);
 		setBestSolution(getActualSolution());
-		setEnviroment(new Enviroment(getActualSolution(), new ExchangeMovement()));
+		setEnviroment(new Enviroment(getActualSolution(), new ExchangeMovement(), 1));
 	}
 	@Override
 	public void runSearch() {
@@ -21,7 +21,7 @@ public class LocalSearch extends SolutionMethod{
 			if (getProblem().firstSolutionIsBetter(aux, getActualSolution())) {
 				setActualSolution(aux);
 				setBestSolution(getActualSolution());
-				setEnviroment(new Enviroment(aux, new ExchangeMovement()));
+				setEnviroment(new Enviroment(aux, new ExchangeMovement(), 1));
 			}
 		}
 		
