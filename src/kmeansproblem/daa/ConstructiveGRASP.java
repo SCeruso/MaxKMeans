@@ -45,17 +45,25 @@ public abstract class ConstructiveGRASP extends SolutionMethod {
 	
 	@Override
 	public void runSearch() {			
+		long time = System.currentTimeMillis();
+		int iteration = 0;
+		
 		initialize();
 		
 		while (true) {
+			iteration++;
 			makeLrc();
 			if (getLrc().size() == 0)
 				break;
 			selectFromLRC();
-			if (getProblem().firstSolutionIsBetter(getActualSolution(), getBestSolution()))
+			if (getProblem().firstSolutionIsBetter(getActualSolution(), getBestSolution())) {
 				setBestSolution(getActualSolution());
+				setIterationOfBestSolution(iteration);
+			}
 		}
-		
+		setIteration(iteration);
+		setElapsedTime(System.currentTimeMillis() - time);
+		setElapsedTimeOfBestSolution(getElapsedTime());
 	}
 	/**
 	 * Selecciona un candidato al azar de la lista restringida de candidatos.
@@ -111,7 +119,8 @@ public abstract class ConstructiveGRASP extends SolutionMethod {
 		for (int i = 0; i < nonInsertedNodes.length; i++) {
 			getMove().makeMove(aux, nonInsertedNodes[i]);
 			getProblem().evaluate(aux);
-			insertLrc(aux);
+			if (getProblem().firstSolutionIsBetter(aux, getActualSolution()))
+				insertLrc(aux);
 			aux = getActualSolution().clone();
 		}
 
@@ -142,8 +151,6 @@ public abstract class ConstructiveGRASP extends SolutionMethod {
 		this.lrcSize = lrcSize;
 	}
 
-
-	
 	protected KMeansSolution getActualSolution() {
 		return actualSolution;
 	}

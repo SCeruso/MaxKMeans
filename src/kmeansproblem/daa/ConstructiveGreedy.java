@@ -32,10 +32,10 @@ public class ConstructiveGreedy extends SolutionMethod{
 	public void runSearch() {
 		getSolutionMethod().runSearch();
 		setBestSolution(getSolutionMethod().getBestSolution());
-		setIterationOfBestSolution(getIterationOfBestSolution());
-		setIteration(getIteration());
-		setElapsedTime(getElapsedTime());
-		setElapsedTimeOfBestSolution(getElapsedTimeOfBestSolution());
+		setIterationOfBestSolution(getSolutionMethod().getIterationOfBestSolution());
+		setIteration(getSolutionMethod().getIteration());
+		setElapsedTime(getSolutionMethod().getElapsedTime());
+		setElapsedTimeOfBestSolution(getSolutionMethod().getElapsedTimeOfBestSolution());
 	}
 	private ConstructiveGRASP getSolutionMethod() {
 		return solutionMethod;
