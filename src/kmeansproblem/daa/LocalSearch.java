@@ -32,10 +32,10 @@ public class LocalSearch extends SolutionMethod{
 	public void setActualSolution(KMeansSolution actualSolution) {
 		this.actualSolution = actualSolution;
 	}
-	private Enviroment getEnviroment() {
+	public Enviroment getEnviroment() {
 		return enviroment;
 	}
-	private void setEnviroment(Enviroment enviroment) {
+	public void setEnviroment(Enviroment enviroment) {
 		this.enviroment = enviroment;
 	}
 	

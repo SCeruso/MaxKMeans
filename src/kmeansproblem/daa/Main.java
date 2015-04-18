@@ -7,9 +7,8 @@ package kmeansproblem.daa;
  * Universiad de La Laguna, Santa Cruz de Tenerife, España.
  */
 import java.io.FileNotFoundException;
-import java.util.BitSet;
 
-import javax.swing.JMenu;
+import structure.problemsolvingmethods.daa.StopCriterion;
 
 public class Main {
 
@@ -17,7 +16,7 @@ public class Main {
 		KMeansProblem problem;
 		ConstructiveGreedy greedy;
 		try {
-			problem = new KMeansProblem(true, "res/problems/max-mean-div-10.txt");
+			problem = new KMeansProblem(true, "res/problems/max-mean-div-20.txt");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -34,10 +33,13 @@ public class Main {
 		System.out.println("Best Solution: " + greedy.getBestSolution());
 		
 		GRASPandLocalSearch grasp;
-		grasp = new GRASPandLocalSearch(problem, 2, ConstructiveGRASP.REVERSE);
+		grasp = new GRASPandLocalSearch(problem, 2, ConstructiveGRASP.DIRECT);
 		grasp.runSearch();
 		System.out.println("Best Solution: " + grasp.getBestSolution());
 		
+		MultiStart multi = new MultiStart(problem, new RandomSolutionGenerator(problem.getNnodes()), new StopCriterion(250));
+		multi.runSearch();
+		System.out.println("Best Solution: " + multi.getBestSolution());
 	}
 
 }

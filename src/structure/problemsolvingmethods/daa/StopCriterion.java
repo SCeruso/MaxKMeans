@@ -13,7 +13,9 @@ public class StopCriterion {
 	public StopCriterion() {
 		
 	}
-	
+	public StopCriterion(long max) {
+		setMax(max);
+	}
 	public boolean stop() {
 		return getIteration() >= getMax()?  true : false;
 	}
