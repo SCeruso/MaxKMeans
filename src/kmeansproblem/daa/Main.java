@@ -13,11 +13,15 @@ import structure.problemsolvingmethods.daa.StopCriterion;
 public class Main {
 
 	public static void main(String[] args) {
-		KMeansProblem problem;
+		KMeansProblem problem = null;
 		ConstructiveGreedy greedy;
 		try {
-			problem = new KMeansProblem(true, "res/problems/max-mean-div-10.txt");
-		} catch (FileNotFoundException e) {
+			problem = new KMeansProblem(true, args[0]);
+		} 
+		catch (ArrayIndexOutOfBoundsException e) {
+			System.err.println("Debe suministrar un argumento con el nombre del fichero donde se encuentra el problema");
+		}
+		catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return;
@@ -28,28 +32,26 @@ public class Main {
 
 		System.out.println("Best Solution greedy directo: " + greedy.getBestSolution());
 		//System.out.println(greedy.getElapsedTime() + ", " + greedy.getIteration());
-
 		greedy = new ConstructiveGreedy(problem, ConstructiveGreedy.REVERSE);
 		greedy.runSearch();
 		System.out.println("Best Solution greedy inverso: " + greedy.getBestSolution());
 		
-		/*GRASPandLocalSearch grasp;
+		GRASPandLocalSearch grasp;
 		grasp = new GRASPandLocalSearch(problem, 4, ConstructiveGRASP.DIRECT);
 		grasp.runSearch();
-		System.out.println("Best Solution: " + grasp.getBestSolution());
-		System.out.println(grasp.getElapsedTime() + ", " + grasp.getIteration());*/
+		System.out.println("Best Solution: GRASP directo con post-procesamiento, lrc = 4 " + grasp.getBestSolution());
+		grasp = new GRASPandLocalSearch(problem, 4, ConstructiveGRASP.REVERSE);
+		grasp.runSearch();
+		System.out.println("Best Solution: GRASP inverso con post-procesamiento, lrc = 4 " + grasp.getBestSolution());
 		
-		/*MultiStart multi = new MultiStart(problem, new RandomSolutionGenerator(problem.getNnodes()), new StopCriterion(20));
+		MultiStart multi = new MultiStart(problem, new RandomSolutionGenerator(problem.getNnodes()), new StopCriterion(20));
 		multi.runSearch();
-		System.out.println("Best Solution: " + multi.getBestSolution());
-		System.out.println(multi.getElapsedTime() + ", " + multi.getIteration());
-		VNS vns = new VNS(problem, 4);
+		System.out.println("Best Solution: multi-start" + multi.getBestSolution());
 		
+		VNS vns = new VNS(problem, 4);
 		vns.runSearch();
-		System.out.println("Best Solution: " + vns.getBestSolution());
-		System.out.println(vns.getElapsedTime() + ", " + vns.getIteration());*/
+		System.out.println("Best Solution: VNS, 4 entornos " + vns.getBestSolution());
+
 	}
 
 }
-// Prepararlo para el jar ejecutable.
-// Implementar cruce para ags
