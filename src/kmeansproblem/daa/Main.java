@@ -16,22 +16,22 @@ public class Main {
 		KMeansProblem problem;
 		ConstructiveGreedy greedy;
 		try {
-			problem = new KMeansProblem(true, "res/problems/max-mean-div-100.txt");
+			problem = new KMeansProblem(true, "res/problems/max-mean-div-10.txt");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return;
 		}
-		/*greedy = new ConstructiveGreedy(problem, ConstructiveGreedy.DIRECT);
+		greedy = new ConstructiveGreedy(problem, ConstructiveGreedy.DIRECT);
 		
 		greedy.runSearch();
 
-		System.out.println("Best Solution: " + greedy.getBestSolution());
-		System.out.println(greedy.getElapsedTime() + ", " + greedy.getIteration());
+		System.out.println("Best Solution greedy directo: " + greedy.getBestSolution());
+		//System.out.println(greedy.getElapsedTime() + ", " + greedy.getIteration());
 
-		greedy = new ConstructiveGreedy(problem, ConstructiveGreedy.DIRECT);
+		greedy = new ConstructiveGreedy(problem, ConstructiveGreedy.REVERSE);
 		greedy.runSearch();
-		System.out.println("Best Solution: " + greedy.getBestSolution());*/
+		System.out.println("Best Solution greedy inverso: " + greedy.getBestSolution());
 		
 		/*GRASPandLocalSearch grasp;
 		grasp = new GRASPandLocalSearch(problem, 4, ConstructiveGRASP.DIRECT);
@@ -43,11 +43,11 @@ public class Main {
 		multi.runSearch();
 		System.out.println("Best Solution: " + multi.getBestSolution());
 		System.out.println(multi.getElapsedTime() + ", " + multi.getIteration());
-		*/VNS vns = new VNS(problem, 4);
+		VNS vns = new VNS(problem, 4);
 		
 		vns.runSearch();
 		System.out.println("Best Solution: " + vns.getBestSolution());
-		System.out.println(vns.getElapsedTime() + ", " + vns.getIteration());
+		System.out.println(vns.getElapsedTime() + ", " + vns.getIteration());*/
 	}
 
 }
